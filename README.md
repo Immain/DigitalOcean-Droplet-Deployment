@@ -53,7 +53,7 @@ For this project, we will be deploying a Digital Ocean Droplet using Ansible. Th
 
 ## Generate SSH Key and Personal Access Token:
 
-<b><span style="color: #9FEF00;">Step One:</span></b> Add SSH Key to Digital Ocean
+<b><span style="color: green;">Step One:</span></b> Add SSH Key to Digital Ocean
 
 1. Go to [Digital Ocean](https://www.digitalocean.com/) and sign in.
 2. On the left sidebar, click on **"Settings"** and then **"Security"**.

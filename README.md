@@ -17,7 +17,7 @@
 <b><p align="center">Repository Updated: <span style="color: #9FEF00;">2024-08-03</span></p></b>
 
 > [!CAUTION]
-> 🚧 This documentation is a work in progress and may not be fully complete
+> This documentation is a work in progress and may not be fully complete
 
 
 <p align="center">
@@ -75,7 +75,7 @@ For this project, we will be deploying a Digital Ocean Droplet using Ansible. Th
 
 ##  Installation
 
-$${\color{lightgreen}Step \space One:}$$ Install Ansible on your local machine.
+<b><span style="color: #9FEF00;">Step One:</span></b>  Install Ansible on your local machine.
 
 ```
 sudo apt install ansible -y

@@ -132,6 +132,11 @@ Display the ```EDITOR``` variable to check that your setting was applied:
 echo $EDITOR
 ```
 
+When you need to edit an encrypted file, use the ```ansible-vault edit``` command:
+```
+ansible-vault edit vault.yml
+```
+
 <b><span style="color: #9FEF00;">Step Two:</span></b> Create a new Ansible Vault password file.
 
 ```

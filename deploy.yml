@@ -1,0 +1,61 @@
+- hosts: localhost
+  vars_files:
+    - ./group_vars/vars.yml
+  tasks:
+
+# Adds the SSH key to the Digital Ocean account
+    - name: add public ssh key to digitalocean account
+      digital_ocean_sshkey:
+        name: 
+        oauth_token: '{{ oauth_token }}' # Digital Ocean Personal Access Token
+        ssh_pub_key: "{{ lookup('file', 'path/to/.ssh/id_rsa.pub') }}" # SSH Public Key
+        state: present
+      register: sshkey_result
+
+# Creates a new Digital Ocean Droplet and assigns the SSH key
+    - name: create a new droplet assigning the key
+      digital_ocean_droplet:
+        name: '{{ item }}'
+        oauth_token: '{{ oauth_token }}' # Digital Ocean Personal Access Token  
+        size_id: s-1vcpu-2gb-amd # Droplet Size
+        region: sfo3 # Digital Ocean Region ID
+        image: lamp-20-04 # Droplet Image 
+        wait_timeout: 700
+        unique_name: yes
+        ssh_keys: ['{{ sshkey_result.data.ssh_key.id }}']
+        state: present
+      with_inventory_hostnames:
+        - web
+      register: droplet_result 
+
+# Saves the IP and hostname to the local hosts file /etc/hosts
+    - name: Save IP and hostname to local hosts file /etc/hosts
+      become: yes
+      lineinfile:
+        path: /etc/hosts
+        regexp: '.*{{ item.data.droplet.name }}$' 
+        line: '{{ item.data.droplet.networks.v4.0.ip_address }} {{ item.data.droplet.name }}' # Save IP and hostname to local hosts file /etc/hosts
+      with_items: '{{ droplet_result.results }}' # Iterate over the results of the droplet
+
+# Waits for 2 minutes to let the Droplet load
+    - name: Pause for 2 Minutes to let Droplet load
+      pause:
+        minutes: 2
+
+# Waits for SSH to come up, if the SSH connection is not ready, the playbook will fail.
+    - name: Wait for SSH to come up
+      wait_for:
+        host: '{{ droplet_result.results[0].data.droplet.networks.v4.0.ip_address }}'
+        port: 22
+        delay: 60
+        timeout: 320
+        state: started
+
+# Connects to the new Droplet and updates the apt packages
+- hosts: web
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+# Ubuntu Update
+  - name: Update and upgrade apt packages
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600

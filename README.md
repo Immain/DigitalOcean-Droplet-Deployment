@@ -11,7 +11,6 @@
 [![GitHub Issues](https://img.shields.io/github/issues/Immain/DigitalOcean-Droplet-Deployment.svg)](https://github.com/Immain/DigitalOcean-Droplet-Deployment/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Immain/DigitalOcean-Droplet-Deployment.svg)](https://github.com/Immain/DigitalOcean-Droplet-Deployment/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-[![PyPI version](https://img.shields.io/pypi/v/ansible-core.svg)](https://pypi.org/project/ansible-core)
 
 </div>
 

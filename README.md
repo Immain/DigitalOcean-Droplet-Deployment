@@ -15,7 +15,7 @@
 
 </div>
 
-<b><p align="center">Repository Updated: <span style="color: #9FEF00;">2024-08-02</span></p></b>
+<b><p align="center">Repository Updated: <span style="color: #9FEF00;">2024-08-03</span></p></b>
 <p align="center">🚧 This documentation is a work in progress and may not be fully complete</p>
 
 <p align="center">
@@ -46,7 +46,7 @@ For this project, we will be deploying a Digital Ocean Droplet using Ansible. Th
 
 ## Prerequisites
 
-- Ansible `v2.16.3` or later
+- Ansible `v2.10.8` or later
 - SSH key for Digital Ocean account
 - Digital Ocean personal access token
 - Digital Ocean Slug ID (e.g. `s-1vcpu-2gb-amd`) and image ID (e.g. `ubuntu-24-04-x64`) - [Available slugs](https://slugs.do-api.dev/)

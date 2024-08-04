@@ -70,7 +70,11 @@ For this project, we will be deploying a Digital Ocean Droplet using Ansible. Th
 
 ##  Installation
 
+> [!IMPORTANT]  
+> Ansible is only available on macOS and Linux. If you are using Windows, you can use the Windows Subsystem for Linux (WSL) to install Ansible.
+
 <b><span style="color: #9FEF00;">Step One:</span></b>  Install Ansible on your local machine.
+
 
 ```
 sudo apt install ansible -y
@@ -129,12 +133,6 @@ Display the ```EDITOR``` variable to check that your setting was applied:
 ```
 echo $EDITOR
 ```
-
-When you need to edit an encrypted file, use the ```ansible-vault edit``` command:
-```
-ansible-vault edit vault.yml
-```
-
 <b><span style="color: #9FEF00;">Step Two:</span></b> Create a new Ansible Vault password file.
 
 ```
@@ -163,6 +161,13 @@ Output:
 ```
 $ANSIBLE_VAULT;1.1;AES256
 343333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+```
+
+## Edit the Ansible Vault
+
+When you need to edit an encrypted file, use the ```ansible-vault edit``` command:
+```
+ansible-vault edit vault.yml
 ```
 
 ## Run the playbook

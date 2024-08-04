@@ -76,7 +76,7 @@ For this project, we will be deploying a Digital Ocean Droplet using Ansible. Th
 <b><span style="color: #9FEF00;">Step One:</span></b> Install Ansible-core on your local machine.
 
 ```
-sudo pip3 install ansible-core
+sudo apt install ansible -y
 ```
 
 <b><span style="color: #9FEF00;">Step Two:</span></b> On your local machine, clone the repository and navigate to the project directory.

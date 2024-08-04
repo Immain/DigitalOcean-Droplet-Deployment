@@ -16,15 +16,6 @@
 
 <b><p align="center">Repository Updated: <span style="color: #9FEF00;">2024-08-03</span></p></b>
 
-<div align="center">
-  
-  > [!CAUTION]
-  > This documentation is a work in progress and may not be fully complete
-
-</div>
-
-
-
 <p align="center">
 Digital Ocean Droplets are virtual private servers that provide scalable compute platforms with add-on storage, security, and monitoring capabilities. They offer a flexible, cost-effective solution for deploying and scaling applications, websites, and services in the cloud. With various configurations available, Droplets can be tailored to meet specific performance and resource requirements for diverse workloads.
 </p>

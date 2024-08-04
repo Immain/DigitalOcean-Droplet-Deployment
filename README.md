@@ -111,19 +111,40 @@ become_ask_pass = False
 
 ## Setup Ansible Vault
 
-<b><span style="color: #9FEF00;">Step One:</span></b> Create a new Ansible Vault password file.
+<b><span style="color: #9FEF00;">Step One:</span></b> Set up the Ansible Vault Editor
+Specify your preferred text editor. A few of Vault’s commands involve opening an editor to manipulate the contents of an encrypted file. Ansible will look at the EDITOR environment variable to find your preferred editor. If this is unset, it will default to vi.
+
+To make this persistent, open your ```~/.bashrc``` file:
+```
+sudo nano nano ~/.bashrc
+```
+
+Specify your preferred editor by adding an ```EDITOR``` assignment to the end of the file:
+```
+export EDITOR=nano
+```
+Save and close the file when you are finished. Source the file again to read the change into the current session:
+```
+. ~/.bashrc
+```
+Display the ```EDITOR``` variable to check that your setting was applied:
+```
+echo $EDITOR
+```
+
+<b><span style="color: #9FEF00;">Step Two:</span></b> Create a new Ansible Vault password file.
 
 ```
 ansible-vault create vault.yml
 ```
-<b><span style="color: #9FEF00;">Step Two:</span></b> You will be prompted to enter and confirm a password:
+<b><span style="color: #9FEF00;">Step Three:</span></b> You will be prompted to enter and confirm a password:
 
 ```
 Output
 New Vault password: 
 Confirm New Vault password:
 ```
-<b><span style="color: #9FEF00;">Step Three:</span></b> To test the encryption function, enter some test text:
+<b><span style="color: #9FEF00;">Step Four:</span></b> To test the encryption function, enter some test text:
 
 ```
 Secret information

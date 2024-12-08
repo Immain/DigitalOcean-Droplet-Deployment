@@ -26,7 +26,7 @@ Digital Ocean Droplets are virtual private servers that provide scalable compute
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
 - [Generate SSH Key and Personal Access Token](#generate-ssh-key-and-personal-access-token)
-- [Setup Ansible Vault](#setup-ansible-vault)
+- [Ansible Vault](#ansible-vault)
 - [Installation](#installation)
 - [Troubleshooting](#troubleshooting)
 - [Changes](#changes)

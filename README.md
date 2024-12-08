@@ -192,7 +192,7 @@ sudo ansible-playbook run.yml --ask-vault-pass
 - Removed the need for the additional hosts file, using ```/etc/hosts``` instead
 - Added ```Add new droplet to in-memory inventory``` for better stability
 - Added ```'{{ droplet_name }}'``` to name the Digital Ocean Droplet from ```group_vars/vars.yml```
-- Added ```project``` under Create Digital Ocean Droplet to specificy which envirnment the droplet belonged to
+- Added ```project``` under Create Digital Ocean Droplet to specificy which environment the droplet belonged to
 - Updated the ```apt``` module, as the old one was not updating the system correctly
 
 <p style="color: #9FEF00;"><b>2024-08-02:</b></p>

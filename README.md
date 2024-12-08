@@ -14,8 +14,8 @@
 
 </div>
 
-<b><p align="center">Repository Updated: <span style="color: #9FEF00;">2024-12-07</span></p></b>
-<p align="center"> 🚧 This documentation is being updated and may not be fully complete 🚧 </p>
+<b><p align="center">Repository Updated: <span style="color: #9FEF00;">2024-12-08</span></p></b>
+
 
 <p align="center">
 Digital Ocean Droplets are virtual private servers that provide scalable compute platforms with add-on storage, security, and monitoring capabilities. They offer a flexible, cost-effective solution for deploying and scaling applications, websites, and services in the cloud. With various configurations available, Droplets can be tailored to meet specific performance and resource requirements for diverse workloads.
@@ -81,19 +81,25 @@ For this project, we will be deploying a Digital Ocean Droplet using Ansible. Th
 sudo apt install ansible -y
 ```
 
-<b><span style="color: #9FEF00;">Step Two:</span></b> On your local machine, clone the repository and navigate to the project directory.
+<b><span style="color: #9FEF00;">Step Two:</span></b> Install the Digital Ocean module from Ansible Community, you can find the Ansible Digital Ocean documentation [here](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/index.html)
+
+```
+ansible-galaxy collection install community.digitalocean
+```
+
+<b><span style="color: #9FEF00;">Step Three:</span></b> On your local machine, clone the repository and navigate to the project directory.
 
 ```
 git clone https://github.com/Immain/DigitalOcean-Droplet-Deployment.git
 ```
 
-<b><span style="color: #9FEF00;">Step Three:</span></b> Change directory to the project directory.
+<b><span style="color: #9FEF00;">Step Four:</span></b> Change directory to the project directory.
 
 ```
 cd DigitalOcean-Droplet-Deployment
 ```
 
-<b><span style="color: #9FEF00;">Step Four:</span></b> Edit the ```ansible.cfg``` file to include default values for the Ansible configuration.
+<b><span style="color: #9FEF00;">Step Five:</span></b> Edit the ```ansible.cfg``` file to include default values for the Ansible configuration.
 
 ```
 [defaults]
@@ -112,110 +118,79 @@ become_ask_pass = False
 
 ```
 
-## Setup Ansible Vault
+## Ansible Vault
+Ansible vault provides a way to encrypt and manage sensitive data such as passwords and tokens
 
-<b><span style="color: #9FEF00;">Step One:</span></b> Set up the Ansible Vault Editor
-Specify your preferred text editor. A few of Vault’s commands involve opening an editor to manipulate the contents of an encrypted file. Ansible will look at the EDITOR environment variable to find your preferred editor. If this is unset, it will default to vi.
+### Vault Setup:
 
-To make this persistent, open your ```~/.bashrc``` file:
+Create a new Ansible Vault password file:
 ```
-sudo nano nano ~/.bashrc
+sudo ansible-vault create group_vars/vault.yml
 ```
 
-Specify your preferred editor by adding an ```EDITOR``` assignment to the end of the file:
+You will be prompted to enter and confirm a password:
 ```
-export EDITOR=nano
-```
-Save and close the file when you are finished. Source the file again to read the change into the current session:
-```
-. ~/.bashrc
-```
-Display the ```EDITOR``` variable to check that your setting was applied:
-```
-echo $EDITOR
-```
-<b><span style="color: #9FEF00;">Step Two:</span></b> Create a new Ansible Vault password file.
-
-```
-ansible-vault create vault.yml
-```
-<b><span style="color: #9FEF00;">Step Three:</span></b> You will be prompted to enter and confirm a password:
-
-```
-Output
 New Vault password: 
 Confirm New Vault password:
 ```
-<b><span style="color: #9FEF00;">Step Four:</span></b> To test the encryption function, enter some test text:
 
+Add your ```oauth_token``` to the vault using a ```vault_``` prefix
 ```
-Secret information
+vault_oauth_token: superdupersecrettoken
 ```
-
 Ansible will encrypt the contents when you close the file. If you check the file, instead of seeing the words you typed, you will see an encrypted block:
-
 ```
-cat vault.yml
+sudo cat group_vars/vault.yml
 ```
-
-Output:
+<b>Output:</b>
 ```
 $ANSIBLE_VAULT;1.1;AES256
 343333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 ```
 
-## Edit the Ansible Vault
-
-When you need to edit an encrypted file, use the ```ansible-vault edit``` command:
+In your ```/group_vars/vars.yml``` file, reference the encrypted variables:
 ```
-ansible-vault edit vault.yml
+oauth_token: "{{ vault_oauth_token }}"
+```
+
+Reference the vault under ```vars_files``` in your playbook, include both the vars.yml and vault.yml files:
+```
+- hosts: localhost
+  vars_files:
+    - ./group_vars/vars.yml
+    - ./group_vars/vault.yml
 ```
 
 ## Run the playbook
-
-<b><span style="color: #9FEF00;">Step One:</span></b> This step involves editing the `hosts` file in the project directory. The `hosts` file is a configuration file that contains the IP addresses or hostnames of the servers that Ansible will manage. In this case, we will add the IP address of the Digital Ocean Droplet that we will deploy.
-
+To run your playbook use
 ```
-web:
-  hosts:
-    DropletName:
+sudo ansible-playbook run.yml --ask-vault-pass
 ```
-
-<b><span style="color: #9FEF00;">Step Two:</span></b> Run the Ansible playbook to deploy the Digital Ocean Droplet.
-
-```
-ansible-playbook --vault-password-file vault.yml deploy.yml
-``` 
-
-<b><span style="color: #9FEF00;">Step Three:</span></b> Connect to your new Digital Ocean Droplet using SSH.
-
-```
-ssh root@DropletIP
-``` 
-
-##  Troubleshooting
-
-If you encounter any general issues during the deployment process:
-
-  1. Check your network connection and ensure you have stable internet access.
-
-  2. Verify that your DigitalOcean API token is valid and has the necessary permissions.
-
-  3. Double-check all configuration files for typos or formatting errors.
-
-  4. Ensure that your SSH key is properly set up and accessible.
-
-  5. If a specific task fails, try running the playbook with verbose output using the `-vvv` flag for more detailed information:
-     ```
-     ansible-playbook -i hosts deploy.yml -vvv
-     ```
-  6. Check the DigitalOcean control panel to see if the droplet was created successfully, even if the Ansible playbook reports an error. For more information on managing droplets, refer to the [DigitalOcean Droplet documentation](https://docs.digitalocean.com/products/droplets/).
-
-  7. If issues persist, try destroying the droplet (if created) and running the playbook again from scratch. You can find instructions on how to destroy a droplet in the [DigitalOcean documentation on deleting droplets](https://docs.digitalocean.com/products/droplets/how-to/destroy/).
-
-  8. For more detailed information, consult the [Ansible DigitalOcean Collection Index](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/index.html).
 
 ## Changes
+
+<p style="color: #9FEF00;"><b>2024-12-08:</b></p>
+
+- Updated Ansible Vault documentation.
+
+
+<p style="color: #9FEF00;"><b>2024-12-07:</b></p>
+
+- DigitalOcean API Changees, this included changing ```size_id``` to ```size``` under creating Digital Ocean Droplet. 
+
+- Removed ```with_inventory_items```
+
+- Removed the need for the additional hosts file, using ```/etc/hosts``` instead
+
+- Added ```Add new droplet to in-memory inventory``` for better stability
+
+- Added ```'{{ droplet_name }}'``` to name the Digital Ocean Droplet from ```group_vars/vars.yml```
+
+- Added ```project``` under Create Digital Ocean Droplet to specificy which envirnment the droplet belonged to
+
+- Updated the ```apt``` module, as the old one was not updating the system correctly
+
+
 
 <p style="color: #9FEF00;"><b>2024-08-02:</b></p>
 

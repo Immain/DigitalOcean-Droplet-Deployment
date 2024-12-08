@@ -1,1 +1,5 @@
-# token: !vault | $ANSIBLE_VAULT;1.1;AES256
+oauth_token: "{{ vault_oauth_token }}"
+droplet_name: Your_Droplet_Name
+project_name: Your_Droplet_Environment
+ssh_private_key_path: /path/to/id_rsa
+ssh_public_key_path: /path/to/id_rsa.pub

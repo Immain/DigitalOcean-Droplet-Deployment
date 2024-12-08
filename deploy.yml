@@ -1,6 +1,7 @@
 - hosts: localhost
   vars_files:
     - ./group_vars/vars.yml
+    - ./group_vars/vault.yml
   tasks:
 
 # Adds the SSH key to the Digital Ocean account
@@ -16,7 +17,7 @@
     - name: create a new droplet assigning the key
       digital_ocean_droplet:
         name: '{{ droplet_name }}'
-        oauth_token: '{{ oauth_token }}' # Digital Ocean Personal Access Token
+        oauth_token: '{{ oauth_token }}' # Digital Ocean Personal Access Token  
         size: s-1vcpu-2gb-amd # Droplet Size
         region: sfo3 # Digital Ocean Region ID
         image: ubuntu-22-04-x64 # Droplet Image
@@ -58,7 +59,7 @@
         state: started
 
 # Connects to the new Droplet and updates the apt packages
-- hosts: YourHostName
+- hosts: BigBuckBunnyTest
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:

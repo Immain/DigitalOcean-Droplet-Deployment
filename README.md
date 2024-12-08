@@ -177,6 +177,12 @@ sudo ansible-playbook run.yml --ask-vault-pass
 <p style="color: #9FEF00;"><b>2024-12-08:</b></p>
 
 - Updated Ansible Vault documentation.
+- Updated README to reflect new playbook changes
+- Removed outdated documentation
+- Updated command to run playbook
+- Removed respository ```hosts``` file
+- Updated ```group_vars/vars.yml```
+- Added ```group_vars/vault.yml``` to variables in ```deploy.yml```
 
 
 <p style="color: #9FEF00;"><b>2024-12-07:</b></p>

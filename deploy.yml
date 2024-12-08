@@ -19,7 +19,8 @@
         oauth_token: '{{ oauth_token }}' # Digital Ocean Personal Access Token  
         size_id: s-1vcpu-2gb-amd # Droplet Size
         region: sfo3 # Digital Ocean Region ID
-        image: lamp-20-04 # Droplet Image 
+        image: lamp-20-04 # Droplet Image
+        project: Digital-Ocean-Project-Name # Assign the droplet to a specific digital ocean project
         wait_timeout: 700
         unique_name: yes
         ssh_keys: ['{{ sshkey_result.data.ssh_key.id }}']

@@ -177,7 +177,7 @@ sudo ansible-playbook run.yml --ask-vault-pass
 <p style="color: #9FEF00;"><b>2024-12-08:</b></p>
 
 - Updated Ansible Vault documentation.
-- Added ability to ![add Tags](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_tag_module.html#ansible-collections-community-digitalocean-digital-ocean-tag-module) per Digital Ocean Ansible documentation
+- Added ability to [add Tags](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_tag_module.html#ansible-collections-community-digitalocean-digital-ocean-tag-module) per Digital Ocean Ansible documentation
 - Updated README to reflect new playbook changes
 - Removed outdated documentation
 - Updated command to run playbook

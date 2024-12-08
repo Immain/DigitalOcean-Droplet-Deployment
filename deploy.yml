@@ -36,7 +36,7 @@
         regexp: '.*{{ droplet_name }}$'
         line: "{{ droplet_result.data.droplet.networks.v4[0].ip_address }} {{ droplet_name }}" # Save IP and hostname to local hosts file /etc/hosts
 
-
+# Dynamically add new host entry with the name specified by the {{ droplet_name }} variable
     - name: Add new droplet to in-memory inventory
       add_host:
         name: "{{ droplet_name }}"

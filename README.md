@@ -81,6 +81,11 @@ For this project, we will be deploying a Digital Ocean Droplet using Ansible. Th
 sudo apt install ansible -y
 ```
 
+Verify the Ansible Version:
+```
+ansible --version
+```
+
 <b><span style="color: #9FEF00;">Step Two:</span></b> Install the Digital Ocean module from Ansible Community, you can find the Ansible Digital Ocean documentation [here](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/index.html)
 
 ```

@@ -169,6 +169,9 @@ Reference the vault under ```vars_files``` in your playbook, include both the va
 ## Adding Tags
 Before running the playbook, set your desired tags, this will be useful for organizing and categorizing your Droplets, making it easier to manage and filter them in the DigitalOcean control panel or via API calls.
 ```
+sudo vi deploy.yml
+```
+```
 # Tag Droplets
     - name: Tag the Droplet
       community.digitalocean.digital_ocean_tag:

@@ -28,6 +28,11 @@
         state: present
       register: droplet_result
 
+# Save Variable Name
+    - name: Save Droplet Name as Fact
+      set_fact:
+        droplet: "{{ droplet_name }}"
+
 # Tag Droplets
     - name: Gather information about the droplet
       community.digitalocean.digital_ocean_droplet_info:
@@ -41,10 +46,9 @@
         name: "{{ item }}"
         resource_id: "{{ droplet_info.data[0].id }}"
         state: present
-      loop: # Add Your Designated Tag Names for your Digitial Ocean Droplet
-        - staging
-        - test
-        - devops
+      loop:
+        - changeme_1
+        - changeme_2
       when: droplet_info.data | length > 0
 
 # Saves the IP and hostname to the local hosts file /etc/hosts
@@ -58,7 +62,7 @@
 # Dynamically add new host entry with the name specified by the {{ droplet_name }} variable
     - name: Add new droplet to in-memory inventory
       add_host:
-        name: "{{ droplet_name }}"
+        name: "{{ hostvars['localhost']['droplet'] }}"
         ansible_host: "{{ droplet_result.data.droplet.networks.v4[0].ip_address }}"
         ansible_user: root
         ansible_ssh_private_key_file: "{{ ssh_private_key_path }}"
@@ -78,7 +82,7 @@
         state: started
 
 # Connects to the new Droplet and updates the apt packages
-- hosts: YourHostName
+- hosts: "{{ hostvars['localhost']['droplet'] }}"
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:

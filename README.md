@@ -166,6 +166,22 @@ Reference the vault under ```vars_files``` in your playbook, include both the va
     - ./group_vars/vault.yml
 ```
 
+## Adding Tags
+Before running the playbook, set your desired tags, this will be useful for organizing and categorizing your Droplets, making it easier to manage and filter them in the DigitalOcean control panel or via API calls.
+```
+# Tag Droplets
+    - name: Tag the Droplet
+      community.digitalocean.digital_ocean_tag:
+        oauth_token: "{{ oauth_token }}"
+        name: "{{ item }}"
+        resource_id: "{{ droplet_info.data[0].id }}"
+        state: present
+      loop:
+        - changeme_1
+        - changeme_2
+      when: droplet_info.data | length > 0
+```
+
 ## Run the playbook
 To run your playbook use
 ```

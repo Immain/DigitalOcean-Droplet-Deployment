@@ -167,15 +167,6 @@ Reference the vault under ```vars_files``` in your playbook, include both the va
 ```
 
 ## Run the playbook
-Before running your playbook, be sure to update the host name in the final task to your droplet's host name, if this is not done prior, you will receive the error ```skipping: no hosts matched```
-```
-# Connects to the new Droplet and updates the apt packages
-- hosts: Your_Droplet_Name
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
-  tasks:
-```
-
 To run your playbook use
 ```
 sudo ansible-playbook run.yml --ask-vault-pass

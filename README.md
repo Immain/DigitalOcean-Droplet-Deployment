@@ -197,7 +197,7 @@ sudo ansible-playbook run.yml --ask-vault-pass
 
 - Updated [Ansible Vault](https://docs.ansible.com/ansible/latest/vault_guide/index.html) documentation.
 - Added ability to [add Tags](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_tag_module.html#ansible-collections-community-digitalocean-digital-ocean-tag-module) per Digital Ocean Ansible documentation
-- Added new variable for ```Dynamically add new host entry```, connecting to host in the final task now pulls the data from ```set_fact``` on localhost
+- Added new variable for ```Dynamically add new host entry```, connecting to host in the final task now pulls the data from ```set_fact``` on localhost and applies it to the hosts name as ```"{{ hostvars['localhost']['droplet'] }}"```
 - Updated README to reflect new playbook changes
 - Removed outdated documentation
 - Updated command to include ```--ask-vault-pass``` to run playbook

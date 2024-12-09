@@ -185,7 +185,7 @@ sudo ansible-playbook run.yml --ask-vault-pass
 
 <p style="color: #9FEF00;"><b>2024-12-08:</b></p>
 
-- Updated Ansible Vault documentation.
+- Updated [Ansible Vault](https://docs.ansible.com/ansible/latest/vault_guide/index.html) documentation.
 - Added ability to [add Tags](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_tag_module.html#ansible-collections-community-digitalocean-digital-ocean-tag-module) per Digital Ocean Ansible documentation
 - Updated README to reflect new playbook changes
 - Removed outdated documentation
@@ -197,7 +197,7 @@ sudo ansible-playbook run.yml --ask-vault-pass
 
 <p style="color: #9FEF00;"><b>2024-12-07:</b></p>
 
-- DigitalOcean API Changees, this included changing ```size_id``` to ```size``` under creating Digital Ocean Droplet. 
+- DigitalOcean [API Changees](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_droplet_module.html#ansible-collections-community-digitalocean-digital-ocean-droplet-module), this included changing ```size_id``` to ```size``` under creating Digital Ocean Droplet. 
 - Removed ```with_inventory_items```
 - Removed the need for the additional hosts file, using ```/etc/hosts``` instead
 - Added ```Add new droplet to in-memory inventory``` for better stability

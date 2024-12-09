@@ -189,7 +189,7 @@ sudo ansible-playbook run.yml --ask-vault-pass
 - Added ability to [add Tags](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_tag_module.html#ansible-collections-community-digitalocean-digital-ocean-tag-module) per Digital Ocean Ansible documentation
 - Updated README to reflect new playbook changes
 - Removed outdated documentation
-- Updated command to run playbook
+- Updated command to include ```--ask-vault-pass``` to run playbook
 - Removed respository ```hosts``` file
 - Updated ```group_vars/vars.yml```
 - Added ```group_vars/vault.yml``` to variables in ```deploy.yml```

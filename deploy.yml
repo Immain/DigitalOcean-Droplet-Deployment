@@ -17,7 +17,7 @@
     - name: create a new droplet assigning the key
       digital_ocean_droplet:
         name: '{{ droplet_name }}'
-        oauth_token: '{{ oauth_token }}' # Digital Ocean Personal Access Token  
+        oauth_token: '{{ oauth_token }}' # Digital Ocean Personal Access Token
         size: s-1vcpu-2gb-amd # Droplet Size
         region: sfo3 # Digital Ocean Region ID
         image: ubuntu-22-04-x64 # Droplet Image
@@ -27,6 +27,25 @@
         ssh_keys: ['{{ sshkey_result.data.ssh_key.id }}']
         state: present
       register: droplet_result
+
+# Tag Droplets
+    - name: Gather information about the droplet
+      community.digitalocean.digital_ocean_droplet_info:
+        oauth_token: "{{ oauth_token }}"
+        name: '{{ droplet_name }}'
+      register: droplet_info
+
+    - name: Tag the Droplet
+      community.digitalocean.digital_ocean_tag:
+        oauth_token: "{{ oauth_token }}"
+        name: "{{ item }}"
+        resource_id: "{{ droplet_info.data[0].id }}"
+        state: present
+      loop: # Add Your Designated Tag Names for your Digitial Ocean Droplet
+        - staging
+        - test
+        - devops
+      when: droplet_info.data | length > 0
 
 # Saves the IP and hostname to the local hosts file /etc/hosts
     - name: Save IP and hostname to local hosts file /etc/hosts
@@ -59,7 +78,7 @@
         state: started
 
 # Connects to the new Droplet and updates the apt packages
-- hosts: BigBuckBunnyTest
+- hosts: YourHostName
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
